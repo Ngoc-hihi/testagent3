@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YEUOI - Nền Tảng Xử Lý Dữ Liệu & Trí Tuệ Doanh Nghiệp</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="app-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <div class="logo-mark">Y</div>
+          <div class="brand-text">
+            <span class="brand-name">YEUOI</span>
+            <span class="brand-tagline">Data Intelligence</span>
+          </div>
+        </div>
+        <button class="icon-btn-ghost sidebar-toggle-btn" id="sidebarToggleBtn" title="Thu gọn/Mở rộng menu">
+          <span class="nav-toggle-icon">◀</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group-title">QUY TRÌNH VẬN HÀNH</div>
+        <button class="nav-item active" data-step="1" id="navStep1">
+          <span class="step-num">1</span>
+          <span class="nav-label">Giới thiệu & Hướng dẫn</span>
+        </button>
+        <button class="nav-item" data-step="2" id="navStep2">
+          <span class="step-num">2</span>
+          <span class="nav-label">Nhập bối cảnh & Dữ liệu</span>
+        </button>
+        <button class="nav-item" data-step="3" id="navStep3">
+          <span class="step-num">3</span>
+          <span class="nav-label">Làm sạch & Kiểm duyệt</span>
+        </button>
+        <button class="nav-item" data-step="4" id="navStep4">
+          <span class="step-num">4</span>
+          <span class="nav-label">Dashboard & Chiến lược</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <div class="status-top-row">
+          <div class="mini-status-dot online"></div>
+          <div class="status-title">Gemini AI Sẵn Sàng</div>
+        </div>
+        <div class="status-desc" id="sidebarStatusText">Chưa nạp dữ liệu</div>
+        <button class="btn-sidebar-reset" id="btnSidebarReset">
+          <span>🔄 Làm mới phiên</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="main-content">
+      <!-- TOP NAVIGATION BAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle-btn" id="mobileMenuBtn">☰</button>
+          <div class="page-title-box">
+            <h1 class="page-title" id="pageTitleHeading">Giới thiệu nền tảng YEUOI</h1>
+            <p class="page-subtitle" id="pageSubtitleDesc">Hướng dẫn thao tác và tổng quan quy trình chuyển đổi số dữ
+              liệu</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- RESET BUTTON -->
+          <button class="btn btn-reset-topbar" id="btnResetSession"
+            title="Làm mới toàn bộ phiên làm việc để nạp bộ dữ liệu mới">
+            <span class="reset-icon">🔄</span>
+            <span>Làm mới phiên</span>
+          </button>
+
+          <div class="quick-widget">
+            <span class="widget-label">Độ tương phản</span>
+            <label class="clay-switch">
+              <input type="checkbox" id="themeToggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="system-badge" style="background: rgba(16, 185, 129, 0.12); color: #059669; font-weight: 600;">
+            <span class="badge-dot" style="background: #10B981;"></span> Gemini 3.5 Flash Active
+          </div>
+
+          <div class="system-badge" id="hostSystemBadge">
+            <span class="badge-dot"></span> <span id="hostSystemText">Localhost:8000</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- STEP CONTAINER -->
+      <div class="content-scrollable">
+
+        <!-- ============================================== -->
+        <!-- MỤC 1: GIỚI THIỆU DOANH NGHIỆP & HƯỚNG DẪN SỬ DỤNG -->
+        <!-- ============================================== -->
+        <section class="workflow-step active" id="step1View">
+          <div class="hero-card">
+            <div class="hero-content">
+              <div class="badge-pill">NỀN TẢNG THÔNG MINH DOANH NGHIỆP</div>
+              <h2 class="hero-title">Chuẩn hóa dữ liệu thô, biến số liệu thành quyết định chiến lược cùng YEUOI</h2>
+              <p class="hero-desc">
+                YEUOI là giải pháp thông minh tự động hóa toàn diện quy trình kiểm thử, làm sạch, phân tích và đề xuất
+                chiến lược kinh doanh cho doanh nghiệp. Giúp đội ngũ quản lý phát hiện điểm nghẽn, tối ưu hóa chi phí và
+                gia tăng biên lợi nhuận một cách bài bản, chuẩn xác.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" id="btnStartWorkflow">
+                  <span>Bắt đầu ngay</span>
+                  <span class="btn-arrow">→</span>
+                </button>
+                <button class="btn btn-secondary" id="btnTrySampleQuick">
+                  <span>Trải nghiệm mẫu F&B (Ảnh đính kèm)</span>
+                </button>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="glass-stat-card">
+                <div class="stat-top">
+                  <span class="stat-tag">Hiệu suất xử lý</span>
+                  <span class="stat-growth">+99.8%</span>
+                </div>
+                <div class="stat-big-val">100% Sạch</div>
+                <div class="stat-sub">Tự động phát hiện lỗi, trùng lặp và ngoại lai</div>
+                <div class="soft-progress-bar">
+                  <div class="progress-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- USER GUIDE SECTION -->
+          <div class="section-title-wrap">
+            <h3 class="section-heading">Hướng dẫn sử dụng 4 bước đơn giản</h3>
+            <p class="section-sub">Dành cho mọi nhân sự quản lý, không cần kiến thức lập trình phức tạp</p>
+          </div>
+
+          <div class="guide-grid">
+            <div class="guide-card">
+              <div class="guide-step-badge">Bước 1</div>
+              <h4 class="guide-card-title">Cung cấp bối cảnh</h4>
+              <p class="guide-card-desc">
+                Lựa chọn loại hình kinh doanh và nêu ngắn gọn vấn đề nhức nhối doanh nghiệp đang muốn giải quyết (ví dụ:
+                tỷ lệ hủy đơn, chi phí hao hụt, khách hàng rời bỏ).
+              </p>
+            </div>
+
+            <div class="guide-card">
+              <div class="guide-step-badge">Bước 2</div>
+              <h4 class="guide-card-title">Tải lên bộ dữ liệu</h4>
+              <p class="guide-card-desc">
+                Kéo thả file định dạng CSV hoặc Excel (.xlsx). Nếu chưa có dữ liệu sẵn, bạn có thể chọn ngay bộ dữ liệu
+                mẫu thực tế của YEUOI để thử nghiệm.
+              </p>
+            </div>
+
+            <div class="guide-card">
+              <div class="guide-step-badge">Bước 3</div>
+              <h4 class="guide-card-title">Xem trước & Kiểm duyệt</h4>
+              <p class="guide-card-desc">
+                Hệ thống tự động lọc bản ghi trùng, chuẩn hóa trường dữ liệu và sửa lỗi. Bảng đối chiếu màu sắc trực
+                quan thể hiện rõ giá trị trước và sau khi làm sạch.
+              </p>
+            </div>
+
+            <div class="guide-card">
+              <div class="guide-step-badge">Bước 4</div>
+              <h4 class="guide-card-title">Dashboard & Chiến lược</h4>
+              <p class="guide-card-desc">
+                Nhận ngay dashboard trực quan kèm bộ lọc đa chiều (Khu vực, Sản phẩm, Kênh bán), phân tích tổng quan,
+                các đề xuất giải pháp và xuất báo cáo Word (.docx).
+              </p>
+            </div>
+          </div>
+
+          <!-- INDUSTRY SELECTION -->
+          <div class="feature-strip-card">
+            <div class="strip-header">
+              <h4 class="strip-title">Khả năng thích ứng theo ngành nghề</h4>
+              <p class="strip-desc">Chọn nhanh định dạng ngành nghề bạn quan tâm để xem quy chuẩn dữ liệu phù hợp:</p>
+            </div>
+            <div class="industry-pills-row">
+              <button class="pill-chip active" data-ind="fnb">Chuỗi Nhà Hàng & F&B</button>
+              <button class="pill-chip" data-ind="retail">Bán lẻ & E-Commerce</button>
+              <button class="pill-chip" data-ind="saas">Công nghệ & B2B SaaS</button>
+              <button class="pill-chip" data-ind="logistics">Sản xuất & Chuỗi cung ứng</button>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- MỤC 2: NHẬP BỐI CẢNH & TẢI BỘ DỮ LIỆU -->
+        <!-- ============================================== -->
+        <section class="workflow-step" id="step2View">
+          <div class="form-container-card">
+            <div class="form-header">
+              <h3 class="form-heading">Thông tin bối cảnh & Dữ liệu đầu vào</h3>
+              <p class="form-sub">Nhập thông tin doanh nghiệp giúp Agent tối ưu hóa mô hình phân tích và ra quyết định
+                chính xác nhất</p>
+            </div>
+
+            <div class="form-body">
+              <div class="form-grid-2col">
+                <div class="form-group">
+                  <label class="form-label" for="inputBusinessType">
+                    Loại hình doanh nghiệp <span class="req">*</span>
+                  </label>
+                  <select class="form-select" id="inputBusinessType">
+                    <option value="Chuỗi F&B, Nhà hàng & Dịch vụ Ẩm thực">Chuỗi F&B, Nhà hàng & Dịch vụ Ẩm thực</option>
+                    <option value="Bán lẻ đa kênh & Thương mại điện tử (Omnichannel Retail)">Bán lẻ đa kênh & Thương mại
+                      điện tử</option>
+                    <option value="Công nghệ & Phần mềm Dịch vụ (B2B SaaS)">Công nghệ & Phần mềm Dịch vụ (B2B SaaS)
+                    </option>
+                    <option value="Sản xuất & Chuỗi cung ứng (Manufacturing)">Sản xuất & Chuỗi cung ứng</option>
+                    <option value="Dịch vụ Tài chính & Bảo hiểm (Fintech)">Dịch vụ Tài chính & Bảo hiểm</option>
+                    <option value="Doanh nghiệp khác">Khác (Tự định nghĩa)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="inputExtraInfo">
+                    Thông tin bổ sung <span class="opt">(Không bắt buộc)</span>
+                  </label>
+                  <input type="text" class="form-input" id="inputExtraInfo"
+                    placeholder="Ví dụ: Quy mô 7 chi nhánh tại Hà Nội, TP.HCM, Đà Nẵng...">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inputProblem">
+                  Vấn đề cần phân tích trọng tâm <span class="req">*</span>
+                </label>
+                <textarea class="form-textarea" id="inputProblem" rows="3"
+                  placeholder="Mô tả cụ thể bài toán doanh nghiệp đang muốn tìm lời giải (Ví dụ: Chi phí nguyên vật liệu và tỷ lệ hao hụt vượt định mức an toàn 12% tại các cơ sở; hoặc tỷ lệ hủy đơn kênh online cao...)"></textarea>
+
+                <div class="quick-tags-wrap">
+                  <span class="tags-hint">Gợi ý nhanh 1 chạm:</span>
+                  <button type="button" class="tag-pill"
+                    data-text="Chi phí nguyên vật liệu và tỷ lệ hao hụt vượt định mức an toàn 12% tại các cơ sở">Hao hụt
+                    chi phí F&B</button>
+                  <button type="button" class="tag-pill"
+                    data-text="Tỷ lệ hủy đơn hàng cao và chi phí hoàn đơn kênh online tăng trong 2 quý gần nhất">Tỷ lệ
+                    hủy đơn cao</button>
+                  <button type="button" class="tag-pill"
+                    data-text="Tỷ lệ khách hàng rời bỏ dịch vụ (Churn rate) gia tăng và chi phí chăm sóc sau bán chưa tối ưu">Khách
+                    hàng rời bỏ (Churn)</button>
+                  <button type="button" class="tag-pill"
+                    data-text="Hiệu suất chuyển đổi theo từng kênh phân phối không đồng đều">Hiệu quả kênh phân
+                    phối</button>
+                </div>
+              </div>
+
+              <!-- FILE UPLOAD ZONE -->
+              <div class="form-group upload-section">
+                <label class="form-label">
+                  Tải lên bộ dữ liệu doanh nghiệp <span class="req">*</span>
+                  <span class="label-badge">Hỗ trợ .csv, .xlsx, .xls, .json</span>
+                </label>
+
+                <div class="upload-dropzone" id="dropzone">
+                  <input type="file" id="fileInput" accept=".csv, .xlsx, .xls, .json" class="file-hidden-input">
+                  <div class="dropzone-inner">
+                    <div class="dropzone-icon-box">📁</div>
+                    <div class="dropzone-texts">
+                      <span class="drop-main">Kéo thả file dữ liệu vào đây hoặc <span class="highlight-link">chọn từ
+                          thiết bị</span></span>
+                      <span class="drop-sub">Dung lượng khuyến nghị dưới 50MB. Hệ thống cam kết bảo mật nội bộ an toàn
+                        100%.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Selected File Display -->
+                <div class="selected-file-card" id="selectedFileCard" style="display: none;">
+                  <div class="file-info-col">
+                    <div class="file-name" id="fileNameDisplay">dataset.csv</div>
+                    <div class="file-size" id="fileSizeDisplay">245 KB</div>
+                  </div>
+                  <button type="button" class="btn-remove-file" id="btnRemoveFile" title="Hủy chọn file">✕</button>
+                </div>
+
+                <!-- SAMPLE DATASET BAR -->
+                <div class="sample-dataset-strip">
+                  <div class="sample-title">Hoặc trải nghiệm ngay bộ dữ liệu mẫu đã thiết lập sẵn:</div>
+                  <div class="sample-btn-group">
+                    <button type="button" class="btn-sample highlight-sample" data-sample="fnb">
+                      <span>✨ Mẫu Chuỗi F&B (Chuẩn ảnh mẫu gửi)</span>
+                    </button>
+                    <button type="button" class="btn-sample" data-sample="retail">
+                      <span>Mẫu Bán Lẻ (158 dòng)</span>
+                    </button>
+                    <button type="button" class="btn-sample" data-sample="saas">
+                      <span>Mẫu SaaS (141 dòng)</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ACTION BUTTON -->
+              <div class="form-actions">
+                <button type="button" class="btn btn-primary btn-large" id="btnSubmitData">
+                  <span>Tiến hành làm sạch & chuẩn hóa dữ liệu</span>
+                  <span class="btn-arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- MỤC 3: LÀM SẠCH & KIỂM DUYỆT (PREVIEW & APPROVE) -->
+        <!-- ============================================== -->
+        <section class="workflow-step" id="step3View">
+
+          <!-- TOP APPROVAL BAR (EXACT AS USER SCREENSHOT) -->
+          <div class="approval-top-header">
+            <div class="approval-meta">
+              <span class="badge-status-pill" id="badgeApprovalStatus">CHỜ DUYỆT (LẦN #1)</span>
+              <h2 class="approval-header-title">Kiểm duyệt Bản Dữ liệu Đã Làm sạch</h2>
+              <p class="approval-header-sub">Các ô được tô màu là những điểm Agent đã chuẩn hóa. Bạn có đồng ý với bản
+                xử lý này không?</p>
+            </div>
+            <div class="approval-header-actions">
+              <button class="btn btn-approve-green" id="btnApproveData">
+                <span>Đồng ý & Xem Báo cáo Phân tích (Bước 4) →</span>
+              </button>
+              <button class="btn btn-disapprove-pink" id="btnRequestRevision">
+                <span>Chưa đồng ý (Liệt kê lỗi cần sửa lại)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. CẤU HÌNH QUY TRÌNH LÀM SẠCH (CLEANING CONFIGURATION) -->
+          <div class="config-panel-card">
+            <div class="config-panel-header" id="configToggleHeader">
+              <div class="config-header-text">
+                <h4 class="config-title">⚙️ Cấu hình Quy trình Làm sạch</h4>
+                <span class="config-sub">Tùy biến các quy tắc và giải thuật chuẩn hóa dữ liệu của Agent</span>
+              </div>
+              <button class="btn-fold" id="btnFoldConfig">▼</button>
+            </div>
+            <div class="config-panel-body" id="configPanelBody">
+              <div class="config-grid">
+                <label class="config-item">
+                  <input type="checkbox" id="cfgRemoveDupes" checked>
+                  <span class="config-label-text">Loại bỏ bản ghi trùng lặp (Deduplication)</span>
+                </label>
+                <label class="config-item">
+                  <input type="checkbox" id="cfgStandardizeText" checked>
+                  <span class="config-label-text">Chuẩn hóa văn bản & khoảng trắng thừa</span>
+                </label>
+                <label class="config-item">
+                  <input type="checkbox" id="cfgStandardizeDates" checked>
+                  <span class="config-label-text">Quy đổi ngày tháng sang chuẩn ISO (YYYY-MM-DD)</span>
+                </label>
+                <label class="config-item">
+                  <input type="checkbox" id="cfgConvertNumbers" checked>
+                  <span class="config-label-text">Bóc tách đơn vị tiền tệ & ký tự số</span>
+                </label>
+                <label class="config-item">
+                  <input type="checkbox" id="cfgFixNegatives" checked>
+                  <span class="config-label-text">Sửa lỗi số âm bất thường sang số dương</span>
+                </label>
+                <div class="config-item select-item">
+                  <span class="config-label-text">Xử lý ô khuyết thiếu:</span>
+                  <select class="form-select-sm" id="cfgMissingStrategy">
+                    <option value="median">Điền Trung vị (Median)</option>
+                    <option value="mean">Điền Trung bình (Mean)</option>
+                    <option value="placeholder">Điền 'Chưa xác định'</option>
+                  </select>
+                </div>
+              </div>
+              <div class="config-action-row">
+                <button class="btn btn-outline btn-sm" id="btnApplyConfig">
+                  <span>Áp dụng cấu hình & Tái xử lý</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. KẾT QUẢ XỬ LÝ & NHẬT KÝ (ĐỐI CHIẾU CHẤT LƯỢNG TRƯỚC VÀ SAU) -->
+          <div class="quality-compare-card">
+            <div class="compare-header">
+              <h4 class="compare-title">📊 Kết quả Xử lý & Đối chiếu Chất lượng (Trước vs Sau khi làm sạch)</h4>
+              <p class="compare-sub">Bảng đối chiếu định lượng các chỉ số toàn vẹn dữ liệu được cải thiện bởi Agent</p>
+            </div>
+
+            <div class="compare-grid">
+              <div class="compare-box">
+                <div class="comp-label">Số dòng dữ liệu</div>
+                <div class="comp-values">
+                  <span class="comp-before" id="compRowBefore">168</span>
+                  <span class="comp-arrow">➔</span>
+                  <span class="comp-after" id="compRowAfter">160</span>
+                </div>
+                <div class="comp-diff" id="compRowDiff">-8 dòng trùng lặp</div>
+              </div>
+
+              <div class="compare-box">
+                <div class="comp-label">Ô khuyết thiếu (Missing)</div>
+                <div class="comp-values">
+                  <span class="comp-before comp-alert" id="compMissBefore">40 ô</span>
+                  <span class="comp-arrow">➔</span>
+                  <span class="comp-after comp-good" id="compMissAfter">0 ô</span>
+                </div>
+                <div class="comp-diff comp-good-text" id="compMissDiff">100% Đã bù đắp</div>
+              </div>
+
+              <div class="compare-box">
+                <div class="comp-label">Lỗi định dạng & Số học</div>
+                <div class="comp-values">
+                  <span class="comp-before comp-alert" id="compFormatBefore">21 lỗi</span>
+                  <span class="comp-arrow">➔</span>
+                  <span class="comp-after comp-good" id="compFormatAfter">0 lỗi</span>
+                </div>
+                <div class="comp-diff comp-good-text" id="compFormatDiff">Chuẩn hóa hoàn tất</div>
+              </div>
+
+              <div class="compare-box">
+                <div class="comp-label">Điểm toàn vẹn (Health Score)</div>
+                <div class="comp-values">
+                  <span class="comp-before" id="compScoreBefore">72.5</span>
+                  <span class="comp-arrow">➔</span>
+                  <span class="comp-after comp-highlight" id="compScoreAfter">99.2/100</span>
+                </div>
+                <div class="comp-diff comp-highlight-text" id="compScoreDiff">+26.7% Cải thiện</div>
+              </div>
+            </div>
+
+            <!-- COLLAPSIBLE LOGS -->
+            <div class="collapsible-log-section">
+              <div class="log-toggle-bar" id="auditLogToggle">
+                <span class="log-toggle-title">Xem nhật ký kỹ thuật chi tiết của Agent (Audit Trail)</span>
+                <span class="log-fold-icon" id="btnFoldAudit">▼</span>
+              </div>
+              <div class="collapsible-log-body" id="auditLogContainer">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. BẢNG XEM TRƯỚC DỮ LIỆU ĐÃ LÀM SẠCH (EXACT SCREENSHOT LAYOUT) -->
+          <div class="preview-table-card">
+            <div class="table-legend-bar">
+              <div class="legend-left">
+                <h4 class="preview-heading">Bảng Xem trước Dữ liệu Đã Làm sạch</h4>
+                <div class="legend-items">
+                  <span class="legend-pill pill-format"><span class="dot-blue"></span> Chuẩn hóa định dạng</span>
+                  <span class="legend-pill pill-numeric"><span class="dot-orange"></span> Sửa lỗi số / ngoại lai</span>
+                  <span class="legend-pill pill-missing"><span class="dot-green"></span> Điền giá trị thiếu</span>
+                  <span class="legend-pill pill-custom"><span class="dot-purple"></span> Sửa theo phản hồi KH</span>
+                </div>
+              </div>
+
+              <div class="legend-right">
+                <label class="control-checkbox">
+                  <input type="checkbox" id="chkShowOriginal" checked>
+                  <span>Hiện giá trị gốc</span>
+                </label>
+                <label class="control-checkbox">
+                  <input type="checkbox" id="chkOnlyModified">
+                  <span>Chỉ dòng có sửa đổi</span>
+                </label>
+                <div class="quick-export-group">
+                  <button class="btn btn-xs" id="btnExportCsvQuick" title="Tải file CSV">Tải CSV</button>
+                  <button class="btn btn-xs" id="btnExportExcelQuick" title="Tải file Excel">Tải Excel</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TABLE SEARCH & STATS BAR -->
+            <div class="table-sub-controls">
+              <input type="text" class="table-search-input" id="tableSearchInput"
+                placeholder="Tìm kiếm nhanh trong bảng...">
+              <span class="table-row-count" id="tableRowCount">Hiển thị 30 dòng</span>
+            </div>
+
+            <!-- TABLE WRAPPER WITH RESIZE SCROLL -->
+            <div class="table-responsive" id="tableResponsive">
+              <table class="diff-table" id="previewTable">
+                <thead id="previewTableHead">
+                  <!-- Dynamically generated -->
+                </thead>
+                <tbody id="previewTableBody">
+                  <!-- Dynamically generated -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- EXPANDABLE FEEDBACK / ERROR CORRECTION DRAWER -->
+            <div class="revision-drawer" id="revisionDrawer" style="display: none;">
+              <div class="drawer-header">
+                <h4 class="drawer-title">Liệt kê sai sót hoặc yêu cầu Agent chỉnh sửa lại</h4>
+                <button class="btn-close-drawer" id="btnCloseRevision">✕</button>
+              </div>
+              <p class="drawer-desc">
+                Nhập nội dung bạn muốn Agent sửa (Ví dụ: "Loại bỏ các dòng có doanh thu âm", "Chuẩn hóa lại ngày tháng",
+                "Xóa cột xyz", "Loại bỏ giá trị 0"):
+              </p>
+              <textarea class="form-textarea" id="revisionInstructions" rows="3"
+                placeholder="Nhập chi tiết yêu cầu chỉnh sửa tại đây..."></textarea>
+
+              <div class="quick-tags-wrap" style="margin-top: 10px;">
+                <span class="tags-hint">Thêm nhanh yêu cầu:</span>
+                <button type="button" class="tag-pill rev-tag" data-text="Loại bỏ toàn bộ các dòng có giá trị âm">Bỏ
+                  dòng giá trị âm</button>
+                <button type="button" class="tag-pill rev-tag" data-text="Loại bỏ các dòng có giá trị bằng 0">Bỏ dòng có
+                  số 0</button>
+                <button type="button" class="tag-pill rev-tag"
+                  data-text="Lọc bỏ các giá trị ngoại lai bất thường (outliers)">Lọc ngoại lai (Outliers)</button>
+                <button type="button" class="tag-pill rev-tag"
+                  data-text="Chuẩn hóa lại định dạng văn bản loại bỏ dấu cách">Chuẩn hóa khoảng trắng</button>
+              </div>
+
+              <div class="drawer-actions">
+                <button class="btn btn-secondary" id="btnCancelRevision">Hủy</button>
+                <button class="btn btn-primary" id="btnSubmitRevision">
+                  <span>Áp dụng tinh chỉnh ngay</span>
+                  <span class="btn-arrow">✓</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- MỤC 4: DASHBOARD TRỰC QUAN & CHIẾN LƯỢC KINH DOANH (GỘP CHUNG) -->
+        <!-- ============================================== -->
+        <section class="workflow-step" id="step4View">
+          <!-- TOP ACTION BANNER -->
+          <div class="dashboard-action-banner">
+            <div class="banner-texts">
+              <span class="banner-tag">KẾT QUẢ PHÂN TÍCH TỔNG HỢP</span>
+              <h3 class="banner-title" id="dashBusinessTitle">Báo Cáo Toàn Diện Dành Cho Doanh Nghiệp</h3>
+              <p class="banner-sub" id="dashProblemSubtitle">Giải quyết vấn đề: Tối ưu hóa vận hành & gia tăng hiệu quả
+              </p>
+            </div>
+            <div class="banner-buttons">
+              <button class="btn btn-download-data" id="btnExportDataCsv" title="Tải dữ liệu đã làm sạch">
+                <span>Tải dữ liệu sạch (.CSV)</span>
+              </button>
+              <button class="btn btn-docx" id="btnExportDocx" title="Xuất báo cáo Word hoàn chỉnh">
+                <span class="docx-icon">📄</span>
+                <span>Tải Báo Cáo Doanh Nghiệp (.docx)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- COMBINED DUAL-TIER FILTER BAR (LỌC CHUNG CHUNG ➔ LỌC CỤ THỂ) -->
+          <div class="dashboard-filter-card">
+            <!-- TẦNG 1: LỌC CHUNG (CHỈ SỐ & NHÓM THEO ẢNH MẪU) -->
+            <div class="filter-tier-1">
+              <div class="tier-title-box">
+                <span class="tier-badge">TẦNG 1: GÓC NHÌN PHÂN TÍCH</span>
+                <span class="tier-hint">Chọn chỉ số & chiều phân nhóm tổng quan</span>
+              </div>
+              <div class="tier-controls-row">
+                <div class="filter-pill-item">
+                  <span class="pill-label">Chỉ số:</span>
+                  <div class="pill-select-wrap">
+                    <select class="styled-select" id="filterMetricSelect">
+                      <option value="Doanh_Thu">Doanh thu</option>
+                      <option value="Chi_Phí_Nguyên_Liệu">Chi phí nguyên liệu</option>
+                      <option value="Chi_Phí_Vận_Hành">Chi phí vận hành</option>
+                      <option value="Số_Lượng_Khách">Số lượng khách</option>
+                      <option value="Tỷ_Lệ_Hao_Hụt">Tỷ lệ hao hụt (%)</option>
+                      <option value="Điểm_Đánh_Giá">Điểm đánh giá / Hài lòng</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-pill-item">
+                  <span class="pill-label">Nhóm:</span>
+                  <div class="pill-select-wrap">
+                    <select class="styled-select" id="filterGroupSelect">
+                      <option value="Khu_Vực">Khu vực</option>
+                      <option value="Cơ_Sở" selected>Cơ sở</option>
+                      <option value="Nhóm_Món">Nhóm món</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TẦNG 2: LỌC CỤ THỂ (THU HẸP PHẠM VI DỮ LIỆU) -->
+            <div class="filter-tier-2">
+              <div class="tier-title-box">
+                <span class="tier-badge tier-badge-sub">TẦNG 2: THU HẸP PHẠM VI</span>
+                <span class="tier-hint">Lọc chi tiết theo từng thực thể cụ thể</span>
+              </div>
+              <div class="tier-controls-row">
+                <div class="filter-sub-item">
+                  <label for="filterRegion">Khu vực cụ thể:</label>
+                  <select class="filter-select-sm" id="filterRegion">
+                    <option value="all">Tất cả khu vực</option>
+                  </select>
+                </div>
+
+                <div class="filter-sub-item">
+                  <label for="filterCategory">Nhóm món cụ thể:</label>
+                  <select class="filter-select-sm" id="filterCategory">
+                    <option value="all">Tất cả nhóm món</option>
+                  </select>
+                </div>
+
+                <div class="filter-sub-item">
+                  <label for="filterStatus">Tiêu chuẩn lọc:</label>
+                  <select class="filter-select-sm" id="filterStatus">
+                    <option value="all">Tất cả bản ghi</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-filter-reset" id="btnResetFilter" title="Đặt lại bộ lọc về mặc định">
+                  <span>Đặt lại bộ lọc</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI CARDS GRID -->
+          <div class="kpi-grid" id="kpiContainer">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- CHARTS SECTION: GỘP CHUNG VỚI CHIẾN LƯỢC -->
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h4 class="chart-title" id="chart1Title">Xu Hướng Tăng Trưởng Theo Thời Gian</h4>
+                <div class="chart-tag">Time Series</div>
+              </div>
+              <div class="chart-canvas-wrap">
+                <canvas id="trendChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h4 class="chart-title" id="chart2Title">Đóng Góp Theo Phân Nhóm Cốt Lõi</h4>
+                <div class="chart-tag">Breakdown</div>
+              </div>
+              <div class="chart-canvas-wrap">
+                <canvas id="categoryChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card full-width-chart">
+              <div class="chart-card-header">
+                <h4 class="chart-title" id="chart3Title">Cơ Cấu Tỷ Trọng Phân Phối</h4>
+                <div class="chart-tag">Distribution</div>
+              </div>
+              <div class="chart-canvas-wrap doughnut-wrap">
+                <canvas id="distributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- TỔNG QUAN PHÂN TÍCH (EXECUTIVE OVERVIEW) -->
+          <div class="overview-box-card">
+            <div class="overview-header">
+              <div class="overview-badge">TỔNG QUAN PHÂN TÍCH</div>
+              <h4 class="overview-title">Nhận xét tổng quan từ Agent phân tích dữ liệu</h4>
+            </div>
+            <div class="overview-bullets" id="overviewBullets">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- ĐỀ XUẤT CHIẾN LƯỢC & RA QUYẾT ĐỊNH (STRATEGY & DECISION MAKING) -->
+          <div class="strategy-composite-card">
+            <div class="strategy-top-header">
+              <div class="badge-pill">ĐỀ XUẤT CHIẾN LƯỢC & RA QUYẾT ĐỊNH THỰC TẾ</div>
+              <h3 class="strategy-heading" id="strategyHeading">Phương Án Tái Cấu Trúc & Tối Ưu Hóa Vận Hành</h3>
+              <p class="strategy-sub" id="strategySub">Kế hoạch hành động cụ thể để giải quyết triệt để bài toán kinh
+                doanh</p>
+            </div>
+
+            <!-- PROPOSED SOLUTION BLOCK -->
+            <div class="solution-block">
+              <div class="solution-tag">PHƯƠNG ÁN ĐỀ XUẤT</div>
+              <h4 class="solution-name" id="solutionName">Giải pháp Tối ưu hóa Nguồn lực & Rà soát Tỷ lệ Rời bỏ</h4>
+              <p class="solution-desc" id="solutionDesc">Đang cập nhật...</p>
+
+              <div class="solution-steps-box">
+                <div class="steps-title">Các bước thực thi cụ thể:</div>
+                <ul class="steps-list" id="solutionStepsList">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+            </div>
+
+            <!-- PROS & CONS GRID -->
+            <div class="pros-cons-grid">
+              <div class="pro-card">
+                <div class="pc-header pro-hdr">
+                  <span class="pc-icon">✓</span>
+                  <span class="pc-title">Ưu điểm & Đòn bẩy tăng trưởng</span>
+                </div>
+                <ul class="pc-list" id="prosList">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+
+              <div class="con-card">
+                <div class="pc-header con-hdr">
+                  <span class="pc-icon">!</span>
+                  <span class="pc-title">Nhược điểm & Thách thức cần khắc phục</span>
+                </div>
+                <ul class="pc-list" id="consList">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+            </div>
+
+            <!-- DECISION RATIONALE (WHY CHOSEN) -->
+            <div class="rationale-card">
+              <div class="rationale-col">
+                <h5 class="rationale-title">Tại sao lại lựa chọn phương án này?</h5>
+                <p class="rationale-text" id="rationaleWhy">Đang tổng hợp...</p>
+              </div>
+              <div class="rationale-col">
+                <h5 class="rationale-title">Kỳ vọng kết quả đạt được</h5>
+                <p class="rationale-text" id="rationaleImpact">Đang tổng hợp...</p>
+              </div>
+            </div>
+
+            <!-- BOTTOM DOCX REMINDER -->
+            <div class="docx-cta-strip">
+              <div class="cta-left">
+                <strong>Bạn cần bản kế hoạch chi tiết để trình bày trước Hội đồng Quản trị?</strong>
+                <p>Bản báo cáo DOCX bao gồm chi tiết tài chính, ma trận rủi ro, kế hoạch ngân sách và lộ trình 90 ngày
+                  đầy đủ.</p>
+              </div>
+              <button class="btn btn-docx" id="btnExportDocxBottom">
+                <span>Tải Báo Cáo Word Hoàn Chỉnh (.docx)</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- RESET CONFIRMATION MODAL -->
+  <div class="modal-backdrop" id="resetModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4 class="modal-title">🔄 Xác nhận Làm mới Phiên làm việc?</h4>
+        <button class="btn-close-drawer" id="btnCloseResetModal">✕</button>
+      </div>
+      <p class="modal-body">
+        Toàn bộ dữ liệu của phiên hiện tại (bảng dữ liệu, lịch sử làm sạch, biểu đồ dashboard) sẽ được xóa sạch để hệ
+        thống sẵn sàng tiếp nhận bộ dữ liệu doanh nghiệp mới của bạn.
+      </p>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelReset">Hủy</button>
+        <button class="btn btn-primary" id="btnConfirmReset">
+          <span>Xác nhận Làm mới</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div class="toast-notification" id="toastNotification">
+    <span class="toast-message" id="toastMsg">Thao tác thành công</span>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+
+</html>
