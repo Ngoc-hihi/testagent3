@@ -60,12 +60,17 @@ def parse_smart_currency(s_val: Any) -> Any:
         return s_val
 
 def parse_smart_date(val: Any) -> Any:
-    """Standardizes dates like 06/01/2026, 12-01-2026, 2026/01/09 to ISO YYYY-MM-DD."""
+    """Standardizes dates like 06/01/2026, 12-01-2026, 2026/01/09, 20240102 to ISO YYYY-MM-DD."""
     if pd.isnull(val):
         return val
     s = str(val).strip()
     if re.match(r'^\d{4}-\d{2}-\d{2}$', s):
         return s
+    m_compact = re.match(r'^(\d{4})(\d{2})(\d{2})$', s)
+    if m_compact:
+        y, mth, d = m_compact.groups()
+        if 1900 <= int(y) <= 2100 and 1 <= int(mth) <= 12 and 1 <= int(d) <= 31:
+            return f"{y}-{int(mth):02d}-{int(d):02d}"
     m = re.match(r'^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})$', s)
     if m:
         d, mth, y = m.groups()
@@ -148,11 +153,15 @@ class DataProcessor:
             raise ValueError("Định dạng file không được hỗ trợ. Vui lòng tải lên file CSV, Excel (.xlsx, .xls) hoặc JSON.")
 
         df = ensure_unique_columns(df)
+        for c in df.columns:
+            df[c] = df[c].astype(object)
         self.raw_df = df.copy()
         return self.raw_df
 
     def load_from_dataframe(self, df: pd.DataFrame):
         df = ensure_unique_columns(df)
+        for c in df.columns:
+            df[c] = df[c].astype(object)
         self.raw_df = df.copy()
 
     def clean_data(self, custom_instructions: str = "", config_overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -167,6 +176,8 @@ class DataProcessor:
 
         cfg = self.cleaning_config
         raw = ensure_unique_columns(self.raw_df.copy())
+        for c in raw.columns:
+            raw[c] = raw[c].astype(object)
         df = raw.copy()
 
         initial_rows = len(raw)
@@ -245,6 +256,10 @@ class DataProcessor:
         if cfg.get("convert_numbers", True):
             for col in df.columns:
                 if col not in date_cols_parsed:
+                    col_str = str(col).lower()
+                    # Skip code, identifier, phone, email, and name columns
+                    if any(term in col_str for term in ['mã', 'code', 'id', 'phone', 'sđt', 'email', 'tên', 'name', 'status', 'trạng thái', 'khách hàng', 'nhân viên', 'bàn', 'chi nhánh']):
+                        continue
                     conv_cnt = 0
                     for idx in df.index:
                         old_v = df.at[idx, col]
